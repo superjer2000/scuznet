@@ -69,4 +69,6 @@ The device turns on and off acceptance of AppleTalk packets based on this comman
 
 FILTERING
 ~~~~~~~~~			
-Scuznet-Daynaport network filter is always configured to only allow packets that: Have correct CRC AND are directed to our MAC address OR are broadcast OR are AppleTalk multicast
+Scuznet-Daynaport network filter works as follows:
+
+ENC Level: Only allow packets that are for the Scuznet MAC address or are broadcast.  If command 0x0D indicates to activate AppleTalk then the pattern match filter is activated to also allow packets that are AppleTalk Multicast (09:00:07:xx:xx:xx).  This is intended to reduce the amount of traffic that reaches the main program.  The multicast pattern match filter will allow a limited amount of other multicast packets through as it's based on a checksum approach.  As such, the main program then performs a further filtering step to only allow valid packets (MAC, Broadcast or ATalk Multicast (if Atalk is turned on via 0xD)) to reach the Macintosh driver.
