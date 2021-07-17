@@ -399,7 +399,8 @@ static void link_read_packet(uint8_t* cmd) // JGK bringing in the cmd so we can 
 					phy_data_offer(dest_mac_addr[i]); // Send Dest MAC address information already read for filter purposes
 					
 		
-				}		
+				}	
+				_delay_us(100);
 			phy_data_offer_stream(&ENC_USART,data_length-6);  // Call the version that doesn't check for _atn as it seems to run about 15% faster for some reason.  Send packet, substracting 6 from the length to account for MAC Address info already sent.	
 			enc_data_end();
 			net_move_rxpt(net_header.next_packet, 1);
